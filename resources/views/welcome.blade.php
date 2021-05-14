@@ -83,7 +83,7 @@
                 <ul>
                 @foreach ($movies as $movie)
                     <li>
-                        <h3>{{$movie->titolo}}</h3>
+                        <h3>{{$movie->title}}</h3>
                         <h4>Autori: {{$movie->author}}</h4>
                         <h4>Genere: {{$movie->genre}}</h4>
                         <p>Plot: {{$movie->plot}}</p>
