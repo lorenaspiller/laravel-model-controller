@@ -10002,10 +10002,15 @@ h3 {
     border-color: #dee2e6;
   }
 }
-table tbody .movie_image {
+.wrapper_index table tbody .movie_image {
   width: 120px;
   height: 120px;
 }
-table tbody .movie_image img {
+.wrapper_index table tbody .movie_image img {
   width: 100%;
+}
+.wrapper_index .toast_deleted {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
 }

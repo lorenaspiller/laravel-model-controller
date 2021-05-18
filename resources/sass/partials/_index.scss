@@ -1,12 +1,20 @@
-table {
-    tbody{
-        .movie_image {
-            width: 120px;
-            height: 120px;
-
-            img {
-                width: 100%;
+.wrapper_index {
+    table {
+        tbody{
+            .movie_image {
+                width: 120px;
+                height: 120px;
+    
+                img {
+                    width: 100%;
+                }
             }
         }
+    }
+    
+    .toast_deleted {
+        position: fixed;
+        bottom: 40px;
+        right: 30px;
     }
 }
