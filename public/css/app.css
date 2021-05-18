@@ -10002,3 +10002,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
+table tbody .movie_image {
+  width: 120px;
+  height: 120px;
+}
+table tbody .movie_image img {
+  width: 100%;
+}

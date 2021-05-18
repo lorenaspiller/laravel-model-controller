@@ -52,6 +52,10 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        if ($data['cover_image'] === NULL) {
+            unset($data['cover_image']);
+        }
         
         $request->validate($this->requestValidation);
 
@@ -65,6 +69,10 @@ class MovieController extends Controller
         // $movieNew->genres = $data['genres'];
         // $movieNew->plot = $data['plot'];
         // $movieNew->year = $data['year'];
+        // if (!empty($data['cover_image'])) {
+        //     $movieNew->cover_image = $data['cover_image'];
+        // }
+
 
         // $movieNew->save();
 
