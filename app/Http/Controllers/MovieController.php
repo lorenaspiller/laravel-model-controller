@@ -26,7 +26,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies.create');
     }
 
     /**
@@ -37,18 +37,28 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $movieNew = new Movie();
+        $movieNew->title = $data['title'];
+        $movieNew->film_director = $data['film_director'];
+        $movieNew->genres = $data['genres'];
+        $movieNew->plot = $data['plot'];
+        $movieNew->year = $data['year'];
+
+        $movieNew->save();
+
+        return redirect()->route('movies.index')->with('message', 'Il film ' . $movieNew->title . ' è stato aggiunto');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        $movie = Movie::find($id);
 
         return view('movies.show', ['movie' => $movie]);
     }
