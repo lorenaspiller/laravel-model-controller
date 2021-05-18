@@ -7,6 +7,20 @@ use App\Movie;
 
 class MovieController extends Controller
 {
+    protected $requestValidation = [];
+
+    public function __construct()
+    {
+        $year = date("Y") + 1;
+
+        $this->requestValidation = [
+            'title' => 'required|string|max:100',
+            'film_director' => 'required|string|max:50',
+            'genres' => 'required|string|max:50',
+            'plot' => 'required|string',
+            'year' => 'required|numeric|min:1900|max:' . $year
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,15 +52,21 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        
+        $request->validate($this->requestValidation);
 
-        $movieNew = new Movie();
-        $movieNew->title = $data['title'];
-        $movieNew->film_director = $data['film_director'];
-        $movieNew->genres = $data['genres'];
-        $movieNew->plot = $data['plot'];
-        $movieNew->year = $data['year'];
+        // mass assignment
+        $movieNew = Movie::create($data);
 
-        $movieNew->save();
+        // assignments
+        // $movieNew = new Movie();
+        // $movieNew->title = $data['title'];
+        // $movieNew->film_director = $data['film_director'];
+        // $movieNew->genres = $data['genres'];
+        // $movieNew->plot = $data['plot'];
+        // $movieNew->year = $data['year'];
+
+        // $movieNew->save();
 
         return redirect()->route('movies.index')->with('message', 'Il film ' . $movieNew->title . ' è stato aggiunto');
     }
