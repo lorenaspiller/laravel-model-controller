@@ -10014,3 +10014,11 @@ h3 {
   bottom: 40px;
   right: 30px;
 }
+
+.wrapper-edit .edit-image-wrapper {
+  width: 100px;
+  height: 100px;
+}
+.wrapper-edit .edit-image-wrapper img {
+  width: 100%;
+}

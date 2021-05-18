@@ -94,30 +94,41 @@ class MovieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        //
+        return view('movies.edit', ['movie' => $movie]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+       
+        $data = $request->all();
+
+        if ($data['cover_image'] === NULL) {
+            unset($data['cover_image']);
+        }
+
+        $request->validate($this->requestValidation);
+
+        $movie->update($data);
+
+        return redirect()->route('movies.show', $movie);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
     public function destroy(Movie $movie)

@@ -28,6 +28,7 @@
                 <td>{{$movie->genres}}</td>
                 <td>
                     <a href="{{route('movies.show', ['movie' => $movie->id])}}"><button type="button" class="btn btn-primary mb-2">Visualizza</button></a>
+                    <a href="{{route('movies.edit', ['movie' => $movie->id])}}"><button type="button" class="btn btn-light mb-2">Modifica</button></a>
                     <form action="{{route('movies.destroy', ['movie'=>$movie->id])}}" method="POST">
                         @csrf
                         @method('DELETE')
