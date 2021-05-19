@@ -30,6 +30,9 @@ class MovieController extends Controller
     {
         $movies = Movie::all();
 
+        // per farmi restituire un json
+        // return response()->json($movies);
+
         return view('movies.index', ['movies' => $movies]);
     }
 
@@ -115,7 +118,7 @@ class MovieController extends Controller
         $data = $request->all();
 
         if ($data['cover_image'] === NULL) {
-            unset($data['cover_image']);
+            $data['cover_image'] = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';
         }
 
         $request->validate($this->requestValidation);
@@ -135,6 +138,6 @@ class MovieController extends Controller
     {
         $movie->delete();
 
-        return redirect()->route('movies.index')-> with('message', 'Il film è stato ELIMINATO');;
+        return redirect()->route('movies.index')-> with('message', 'Il film ' . $movie->title . ' è stato ELIMINATO');
     }
 }

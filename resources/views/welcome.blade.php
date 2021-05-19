@@ -8,6 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
 
         <!-- Styles -->
         <style>
@@ -65,32 +67,43 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
+            
             <div class="content">
-                <ul>
-                @foreach ($movies as $movie)
-                    <li>
-                        <h3>{{$movie->title}}</h3>
-                        <h4>Autori: {{$movie->author}}</h4>
-                        <h4>Genere: {{$movie->genre}}</h4>
-                        <p>Plot: {{$movie->plot}}</p>
-                    </li>
-                @endforeach
-                </ul>
+
+                <h1><strong>MOVIES LIST</strong></h1>
+                
+                <!-- Vue JS -->
+                <div id="app" class="mt-5 mb-5">
+                    <ul class="list-unstyled">
+                        <li v-for="film in films">
+                            <h2>@{{film.title}}</h2>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /Vue JS -->
+              
+                <a href="{{route('movies.index')}}"><button type="button" class="btn btn-info">Movies Table</button></a>
             </div>
         </div>
+
+        <!-- axios CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    films: []
+                },
+                mounted: function() {
+                    axios.get('api/movies')
+                    .then((response) =>  {
+                        this.films = response.data;
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
